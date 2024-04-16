@@ -9,17 +9,21 @@ interface ButtonProps {
   backgroundColor?: string;
   fullWidth?: boolean;
   endIcon?: React.ReactNode;
+  variant?: "contained" | "outlined" | "text" | string;
+  href?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
   label,
-  endIcon,
   onClick,
   size = "medium",
   Colorvariant = "primary",
   disabled = false,
   backgroundColor,
   fullWidth = false,
+  endIcon,
+  variant = "text",
+  href,
 }) => {
   const sizeClasses = {
     small: "py-1 px-2 text-sm",
@@ -46,23 +50,51 @@ const Button: React.FC<ButtonProps> = ({
 
   const fullWidthClass = fullWidth ? "w-full" : "";
 
+  let variantClasses = "";
+  switch (variant) {
+    case "contained":
+      variantClasses = "bg-opacity-100 border-transparent";
+      break;
+    case "outlined":
+      variantClasses = "border border-current bg-transparent";
+      break;
+    case "text":
+    default:
+      variantClasses = "bg-transparent";
+  }
+
   const buttonClasses = `
     rounded ${sizeClasses[size]} ${ColorvariantClasses[Colorvariant]}
     ${fullWidthClass} ${disabled ? "opacity-50 cursor-not-allowed" : ""}
   `;
 
-  return (
-    <button
-      type="button"
-      className={buttonClasses}
-      style={{ backgroundColor, color: textColor }}
-      onClick={disabled ? undefined : onClick}
-      disabled={disabled}
-    >
-      {label}
-      {endIcon && endIcon}
-    </button>
-  );
+  if (href) {
+    return (
+      <a
+        href={href}
+        className={buttonClasses}
+        style={{ backgroundColor, color: textColor }}
+        onClick={disabled ? undefined : onClick}
+        aria-disabled={disabled}
+      >
+        {label}
+        {endIcon && endIcon}
+      </a>
+    );
+  } else {
+    return (
+      <button
+        type="button"
+        className={buttonClasses}
+        style={{ backgroundColor, color: textColor }}
+        onClick={disabled ? undefined : onClick}
+        disabled={disabled}
+      >
+        {label}
+        {endIcon && endIcon}
+      </button>
+    );
+  }
 };
 
 function getContrastColor(hexColor: string): string {

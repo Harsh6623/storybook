@@ -16,6 +16,8 @@ export default {
       options: ["primary", "secondary", "danger", "success"],
     },
     disabled: { control: "boolean" },
+    variant: { control: "select", options: ["contained", "outlined", "text"] },
+    href: { control: "text" },
   },
 };
 
