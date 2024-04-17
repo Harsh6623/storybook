@@ -10,9 +10,7 @@ export default {
       options: ["small", "medium", "large"],
       control: { type: "select" },
     },
-    disabled: {
-      control: { type: "boolean" },
-    },
+
     required: {
       control: { type: "boolean" },
     },
@@ -42,6 +40,5 @@ Default.args = {
   placeholder: "Enter text",
   value: "",
   size: "medium",
-  disabled: false,
   required: false,
 };

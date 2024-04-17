@@ -4,8 +4,6 @@ interface ButtonProps {
   label: string;
   onClick?: () => void;
   size?: "small" | "medium" | "large";
-  Colorvariant?: "primary" | "secondary" | "danger" | "success";
-  disabled?: boolean;
   backgroundColor?: string;
   fullWidth?: boolean;
   endIcon?: React.ReactNode;
@@ -17,9 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   label,
   onClick,
   size = "medium",
-  Colorvariant = "primary",
-  disabled = false,
-  backgroundColor,
+  backgroundColor = "#3b82f6",
   fullWidth = false,
   endIcon,
   variant = "text",
@@ -31,70 +27,36 @@ const Button: React.FC<ButtonProps> = ({
     large: "py-3 px-6 text-lg",
   };
 
-  const textColor = disabled
-    ? "#FFFFFF"
-    : backgroundColor
-      ? getContrastColor(backgroundColor)
-      : "#FFFFFF";
-
-  const ColorvariantClasses = {
-    primary: backgroundColor ? "" : "bg-blue-500 hover:bg-blue-600 text-white",
-    secondary: backgroundColor
-      ? ""
-      : "bg-gray-500 hover:bg-gray-600 text-white",
-    danger: backgroundColor ? "" : "bg-red-500 hover:bg-red-600 text-white",
-    success: backgroundColor
-      ? ""
-      : "bg-green-500 hover:bg-green-600 text-white",
+  const variantClasses = {
+    contained: "border border-transparent",
+    outlined: "border border-current bg-transparent",
+    text: "bg-transparent",
   };
 
   const fullWidthClass = fullWidth ? "w-full" : "";
 
-  let variantClasses = "";
-  switch (variant) {
-    case "contained":
-      variantClasses = "bg-opacity-100 border-transparent";
-      break;
-    case "outlined":
-      variantClasses = "border border-current bg-transparent";
-      break;
-    case "text":
-    default:
-      variantClasses = "bg-transparent";
-  }
-
   const buttonClasses = `
-    rounded ${sizeClasses[size]} ${ColorvariantClasses[Colorvariant]}
-    ${fullWidthClass} ${disabled ? "opacity-50 cursor-not-allowed" : ""}
-  `;
+        rounded ${sizeClasses[size]} ${fullWidthClass}
+    `;
 
-  if (href) {
-    return (
-      <a
-        href={href}
-        className={buttonClasses}
-        style={{ backgroundColor, color: textColor }}
-        onClick={disabled ? undefined : onClick}
-        aria-disabled={disabled}
-      >
-        {label}
-        {endIcon && endIcon}
-      </a>
-    );
-  } else {
-    return (
-      <button
-        type="button"
-        className={buttonClasses}
-        style={{ backgroundColor, color: textColor }}
-        onClick={disabled ? undefined : onClick}
-        disabled={disabled}
-      >
-        {label}
-        {endIcon && endIcon}
-      </button>
-    );
-  }
+  const textColor = getContrastColor(backgroundColor);
+  const ButtonElement = href ? "a" : "button";
+
+  return (
+    <ButtonElement
+      href={href}
+      type={href ? undefined : "button"}
+      onClick={onClick}
+      className={buttonClasses}
+      style={{
+        backgroundColor: backgroundColor || "",
+        color: textColor,
+      }}
+    >
+      {label}
+      {endIcon}
+    </ButtonElement>
+  );
 };
 
 function getContrastColor(hexColor: string): string {

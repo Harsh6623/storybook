@@ -6,7 +6,6 @@ interface TextFieldProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  disabled?: boolean;
   required?: boolean;
   size?: "small" | "medium" | "large";
   type?: string;
@@ -20,7 +19,6 @@ const TextField: React.FC<TextFieldProps> = ({
   value,
   onChange,
   placeholder,
-  disabled = false,
   required = false,
   size = "medium",
   type = "text",
@@ -50,7 +48,6 @@ const TextField: React.FC<TextFieldProps> = ({
         value={value}
         onChange={handleInputChange}
         placeholder={placeholder}
-        disabled={disabled}
         required={required}
         type={type}
         {...inputProps}

@@ -3,7 +3,6 @@ import React from "react";
 interface ButtonGroupProps {
   children: React.ReactNode;
   color?: "primary" | "secondary" | "danger" | "success";
-  disabled?: boolean;
   orientation?: "horizontal" | "vertical";
   size?: "small" | "medium" | "large";
   variant?: "text" | "outlined" | "contained";
@@ -13,7 +12,6 @@ interface ButtonGroupProps {
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
   children,
   color = "primary",
-  disabled = false,
   orientation = "horizontal",
   size = "medium",
   variant = "contained",
@@ -54,10 +52,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
       {React.Children.map(children, (child, index) => (
         <button
           key={index}
-          className={`w-24 flex-1 focus:outline-none ${sizeClass} ${variantClass} ${colorClass} ${
-            disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-opacity-90"
-          }`}
-          disabled={disabled}
+          className={`w-24 flex-1 focus:outline-none ${sizeClass} ${variantClass} ${colorClass}`}
           onClick={onClick}
         >
           {child}

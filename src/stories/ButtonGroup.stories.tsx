@@ -13,7 +13,6 @@ export default {
         options: ["primary", "secondary", "danger", "success"],
       },
     },
-    disabled: { control: "boolean" },
     orientation: {
       control: {
         type: "select",
@@ -46,7 +45,6 @@ const Template: StoryFn<any> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   color: "primary",
-  disabled: false,
   orientation: "vertical",
   size: "medium",
   variant: "outlined",
