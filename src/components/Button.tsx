@@ -2,18 +2,16 @@ import React from "react";
 
 interface ButtonProps {
   label: string;
-  onClick?: () => void;
   size?: "small" | "medium" | "large";
   backgroundColor?: string;
   fullWidth?: boolean;
   endIcon?: React.ReactNode;
-  variant?: "contained" | "outlined" | "text" | string;
+  variant?: "contained" | "outlined" | "text";
   href?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
   label,
-  onClick,
   size = "medium",
   backgroundColor = "#3b82f6",
   fullWidth = false,
@@ -46,7 +44,6 @@ const Button: React.FC<ButtonProps> = ({
     <ButtonElement
       href={href}
       type={href ? undefined : "button"}
-      onClick={onClick}
       className={buttonClasses}
       style={{
         backgroundColor: backgroundColor || "",

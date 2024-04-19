@@ -1,21 +1,22 @@
 import React from "react";
+import tinycolor from "tinycolor2";
 
 interface ButtonGroupProps {
   children: React.ReactNode;
-  color?: "primary" | "secondary" | "danger" | "success";
+  backgroundColor?: string;
   orientation?: "horizontal" | "vertical";
   size?: "small" | "medium" | "large";
   variant?: "text" | "outlined" | "contained";
-  onClick?: () => void;
+  // onClick?: () => void;
 }
 
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
   children,
-  color = "primary",
+  backgroundColor = "#3b82f6",
   orientation = "horizontal",
   size = "medium",
   variant = "contained",
-  onClick,
+  // onClick,
 }: ButtonGroupProps) => {
   const orientationClass = orientation === "vertical" ? "flex-col" : "flex-row";
 
@@ -29,31 +30,19 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   const variantClass =
     variant === "outlined" ? "border" : variant === "text" ? "" : "shadow-md";
 
-  let colorClass = "";
-  switch (color) {
-    case "primary":
-      colorClass = "bg-blue-500 text-white hover:bg-blue-600";
-      break;
-    case "secondary":
-      colorClass = "bg-gray-300 text-gray-800 hover:bg-gray-400";
-      break;
-    case "danger":
-      colorClass = "bg-red-500 text-white hover:bg-red-600";
-      break;
-    case "success":
-      colorClass = "bg-green-500 text-white hover:bg-green-600";
-      break;
-    default:
-      colorClass = "bg-blue-500 text-white hover:bg-blue-600";
-  }
+  const textColor = getContrastColor(backgroundColor);
 
   return (
     <div className={`flex ${orientationClass} rounded-md overflow-hidden`}>
       {React.Children.map(children, (child, index) => (
         <button
           key={index}
-          className={`w-24 flex-1 focus:outline-none ${sizeClass} ${variantClass} ${colorClass}`}
-          onClick={onClick}
+          className={`w-24 flex-1 focus:outline-none ${sizeClass} ${variantClass}`}
+          // onClick={onClick}
+          style={{
+            backgroundColor: backgroundColor,
+            color: textColor,
+          }}
         >
           {child}
         </button>
@@ -61,4 +50,10 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
     </div>
   );
 };
+
 export default ButtonGroup;
+
+function getContrastColor(backgroundColor: string) {
+  const color = tinycolor(backgroundColor);
+  return color.isLight() ? "#000" : "#FFF";
+}

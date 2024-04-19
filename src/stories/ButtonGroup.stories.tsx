@@ -5,14 +5,11 @@ import CustomButtonGroup from "@/components/ButtonGroup";
 export default {
   title: "Components/ButtonGroup",
   component: CustomButtonGroup,
+
   argTypes: {
     children: { control: "text" },
-    color: {
-      control: {
-        type: "select",
-        options: ["primary", "secondary", "danger", "success"],
-      },
-    },
+    backgroundColor: { control: "color" },
+
     orientation: {
       control: {
         type: "select",
@@ -31,7 +28,7 @@ export default {
         options: ["text", "outlined", "contained"],
       },
     },
-    onClick: { action: "Button clicked" },
+    // onClick: { action: "Button clicked" },
   },
 } as Meta;
 
@@ -44,7 +41,6 @@ const Template: StoryFn<any> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  color: "primary",
   orientation: "vertical",
   size: "medium",
   variant: "outlined",
