@@ -34,6 +34,7 @@ const Button: React.FC<ButtonProps> = ({
   const fullWidthClass = fullWidth ? "w-full" : "";
 
   const buttonClasses = `
+        bg-blue-600 text-white dark:bg-blue-400
         rounded ${sizeClasses[size]} ${fullWidthClass}
     `;
 
@@ -45,10 +46,12 @@ const Button: React.FC<ButtonProps> = ({
       href={href}
       type={href ? undefined : "button"}
       className={buttonClasses}
-      style={{
-        backgroundColor: backgroundColor || "",
-        color: textColor,
-      }}
+      style={
+        {
+          // backgroundColor: backgroundColor || "",
+          // color: textColor,
+        }
+      }
     >
       {label}
       {endIcon}

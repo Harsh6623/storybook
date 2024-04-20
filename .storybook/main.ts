@@ -16,6 +16,8 @@ const config: StorybookConfig = {
         },
       },
     },
+    "@storybook/addon-themes",
+    "@storybook/addon-styling-webpack"
   ],
   framework: {
     name: "@storybook/nextjs",
