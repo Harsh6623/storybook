@@ -46,12 +46,10 @@ const Button: React.FC<ButtonProps> = ({
       href={href}
       type={href ? undefined : "button"}
       className={buttonClasses}
-      style={
-        {
-          // backgroundColor: backgroundColor || "",
-          // color: textColor,
-        }
-      }
+      style={{
+        backgroundColor: backgroundColor || "",
+        color: textColor,
+      }}
     >
       {label}
       {endIcon}
