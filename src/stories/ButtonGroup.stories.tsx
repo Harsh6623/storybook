@@ -39,8 +39,8 @@ const Template: StoryFn<any> = (args) => (
   </CustomButtonGroup>
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const Buttons = Template.bind({});
+Buttons.args = {
   orientation: "vertical",
   size: "medium",
   variant: "outlined",

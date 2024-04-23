@@ -32,8 +32,8 @@ const Template: StoryFn = (args) => (
   />
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const Click = Template.bind({});
+Click.args = {
   onClick: () => alert("FAB clicked!"),
   children: "✚",
   backgroundColor: "#3b82f6",

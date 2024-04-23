@@ -1,22 +1,17 @@
 import React from "react";
-import TransferList, { TransferListProps } from "../components/TransferList";
 import { StoryFn } from "@storybook/react";
-
+import TransferList, { TransferListProps } from "@/components/TransferList";
 export default {
   title: "TransferList",
   component: TransferList,
 };
-
-const Template: StoryFn<TransferListProps> = (args) => (
+const Template: StoryFn<TransferListProps> = (args: TransferListProps) => (
   <TransferList {...args} />
 );
-
-export const Default = Template.bind({});
-Default.args = {
-  availableItems: ["Item 1", "Item 2", "Item 3"],
-  transferredItems: ["Item 4", "Item 5"],
-  onTransfer: (items, direction) => {
-    console.log("Transfer direction:", direction);
-    console.log("Items to transfer:", items);
+export const List = Template.bind({});
+List.args = {
+  items: ["Item 1", "Item 2", "Item 3"],
+  onTransfer: (item: string, direction: "left" | "right") => {
+    console.log(`Transferring ${item} to ${direction}`);
   },
 };

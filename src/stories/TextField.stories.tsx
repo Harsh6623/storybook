@@ -33,8 +33,8 @@ const Template: StoryFn = (args) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
+export const Text = Template.bind({});
+Text.args = {
   id: "text-field",
   label: "Text Field",
   placeholder: "Enter text",

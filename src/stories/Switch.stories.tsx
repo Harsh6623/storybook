@@ -9,7 +9,14 @@ export default {
     color: {
       control: {
         type: "select",
-        options: ["primary", "secondary", "error", "success", "warning"],
+        options: [
+          "primary",
+          "secondary",
+          "error",
+          "info",
+          "success",
+          "warning",
+        ],
       },
     },
     size: {
@@ -18,11 +25,17 @@ export default {
         options: ["small", "medium", "large"],
       },
     },
+    edge: {
+      control: {
+        type: "select",
+        options: ["start", "end"],
+      },
+    },
   },
 } as Meta;
 const Template: StoryFn<SwitchProps> = (args) => <Switch {...args} />;
-export const Default = Template.bind({});
-Default.args = {
+export const SwitchButton = Template.bind({});
+SwitchButton.args = {
   onChange: (checked: boolean): void => {
     console.log("Switch toggled:", checked);
   },

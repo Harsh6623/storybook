@@ -1,96 +1,75 @@
 import React, { useState } from "react";
-
 export interface TransferListProps {
-  availableItems: string[];
-  transferredItems: string[];
-  onTransfer: (
-    items: string[],
-    direction: "toTransferred" | "toAvailable"
-  ) => void;
+  items: string[];
+  onTransfer: (item: string, direction: "left" | "right") => void;
 }
-
-const TransferList: React.FC<TransferListProps> = ({
-  availableItems,
-  transferredItems,
-  onTransfer,
-}) => {
-  const [selectedAvailableItems, setSelectedAvailableItems] = useState<
-    string[]
-  >([]);
-  const [selectedTransferredItems, setSelectedTransferredItems] = useState<
-    string[]
-  >([]);
-
-  const handleTransfer = (direction: "toTransferred" | "toAvailable") => {
-    if (direction === "toTransferred") {
-      // Move selected available items to transferred items
-      onTransfer(selectedAvailableItems, direction);
-      setSelectedAvailableItems([]);
-    } else {
-      // Move selected transferred items to available items
-      onTransfer(selectedTransferredItems, direction);
-      setSelectedTransferredItems([]);
+const TransferList: React.FC<TransferListProps> = ({ items, onTransfer }) => {
+  const [leftItems, setLeftItems] = useState(items);
+  const [rightItems, setRightItems] = useState<string[]>([
+    "Item 4",
+    "Item 5",
+    "Item 6",
+  ]);
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const handleItemClick = (item: string) => {
+    setSelectedItem(item);
+  };
+  const handleTransfer = (direction: "left" | "right") => {
+    if (selectedItem) {
+      if (direction === "left") {
+        setRightItems(rightItems.filter((i) => i !== selectedItem));
+        setLeftItems([...leftItems, selectedItem]);
+      } else if (direction === "right") {
+        setLeftItems(leftItems.filter((i) => i !== selectedItem));
+        setRightItems([...rightItems, selectedItem]);
+      }
+      onTransfer(selectedItem, direction);
+      setSelectedItem(null);
     }
   };
-
   return (
-    <div className="flex justify-center">
-      <div className="flex">
-        {/* Available Items */}
-        <div className="w-48 mr-4">
-          <h3 className="text-lg font-semibold mb-2">Available Items</h3>
-          <ul className="bg-gray-100 p-2 rounded">
-            {availableItems.map((item, index) => (
+    <div className="flex flex-col space-y-4">
+      <div className="flex flex-row justify-between items-center">
+        <div className="w-1/2">
+          <h3 className="text-lg font-bold mb-2">Left Items</h3>
+          <ul className="bg-gray-100 p-4 rounded-md">
+            {leftItems.map((item) => (
               <li
-                key={index}
-                className={`py-1 px-2 cursor-pointer hover:bg-gray-200 ${
-                  selectedAvailableItems.includes(item) ? "bg-blue-200" : ""
+                key={item}
+                className={`cursor-pointer p-2 rounded ${
+                  selectedItem === item ? "bg-blue-200" : "hover:bg-gray-200"
                 }`}
-                onClick={() =>
-                  setSelectedAvailableItems((prev) =>
-                    prev.includes(item)
-                      ? prev.filter((i) => i !== item)
-                      : [...prev, item]
-                  )
-                }
+                onClick={() => handleItemClick(item)}
               >
                 {item}
               </li>
             ))}
           </ul>
         </div>
-        {/* Transfer Buttons */}
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col items-center justify-center w-1/12">
           <button
-            className="my-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            onClick={() => handleTransfer("toTransferred")}
+            className="mt-4 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={() => handleTransfer("right")}
           >
             &gt;
           </button>
           <button
-            className="my-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            onClick={() => handleTransfer("toAvailable")}
+            className="mt-4 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={() => handleTransfer("left")}
           >
             &lt;
           </button>
         </div>
-        {/* Transferred Items */}
-        <div className="w-48">
-          <h3 className="text-lg font-semibold mb-2">Transferred Items</h3>
-          <ul className="bg-gray-100 p-2 rounded">
-            {transferredItems.map((item, index) => (
+        <div className="w-1/2">
+          <h3 className="text-lg font-bold mb-2">Right Items</h3>
+          <ul className="bg-gray-100 p-4 rounded-md">
+            {rightItems.map((item) => (
               <li
-                key={index}
-                className={`py-1 px-2 cursor-pointer hover:bg-gray-200 ${
-                  selectedTransferredItems.includes(item) ? "bg-blue-200" : ""
+                key={item}
+                className={`cursor-pointer p-2 rounded ${
+                  selectedItem === item ? "bg-blue-200" : "hover:bg-gray-200"
                 }`}
-                onClick={() =>
-                  setSelectedTransferredItems((prev) =>
-                    prev.includes(item)
-                      ? prev.filter((i) => i !== item)
-                      : [...prev, item]
-                  )
-                }
+                onClick={() => handleItemClick(item)}
               >
                 {item}
               </li>
@@ -101,5 +80,4 @@ const TransferList: React.FC<TransferListProps> = ({
     </div>
   );
 };
-
 export default TransferList;
