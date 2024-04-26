@@ -1,20 +1,15 @@
-import Tooltip, { TooltipProps } from "@/components/Tooltip";
-import { StoryFn } from "@storybook/react";
 import React from "react";
-
+import { Meta } from "@storybook/react";
+import Tooltip from "@/components/Tooltip";
 export default {
   title: "Components/Tooltip",
   component: Tooltip,
-};
-
-const Template: StoryFn<TooltipProps> = (args: any) => <Tooltip {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {
-  content: "This is a tooltip",
-  children: (
+} as Meta;
+const Template = (args: any) => (
+  <Tooltip>
     <button className="bg-blue-500 text-white py-2 px-4 rounded">
       Hover over me
     </button>
-  ),
-};
+  </Tooltip>
+);
+export const Default = Template.bind({});
