@@ -12,11 +12,14 @@
   },
   "dependencies": {
     "@mui/material": "^5.15.15",
+    "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
     "next": "14.2.1",
     "react": "^18",
+    "react-bootstrap": "^2.10.2",
     "react-dom": "^18",
     "react-icons": "^5.1.0",
+    "tailwind-merge": "^2.3.0",
     "tinycolor2": "^1.6.0"
   },
   "devDependencies": {
