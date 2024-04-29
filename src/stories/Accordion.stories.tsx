@@ -1,17 +1,22 @@
 import React from "react";
-import Accordion, { AccordionProps } from "@/components/Accordion";
-import { StoryFn } from "@storybook/react";
-
+import { StoryFn, Meta } from "@storybook/react";
+import Accordion from "@/components/Accordion";
 export default {
   title: "Accordion",
   component: Accordion,
-};
-
-const Template: StoryFn<AccordionProps> = (args) => <Accordion {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {
-  question: "What is an Accordion?",
-  answer:
-    "An accordion is a folding musical instrument that is played by pressing buttons or keys to open and close bellows, which force air through reeds that vibrate to produce sound.",
+  argTypes: {
+    title: { control: "text" },
+    content: { control: "text" },
+  },
+} as Meta;
+const Template: StoryFn<{ title: string; content: string }> = (args) => (
+  <Accordion {...args}>
+    <p className="text-gray-600">{args.content}</p>{" "}
+  </Accordion>
+);
+export const Accordions = Template.bind({});
+Accordions.args = {
+  title: "Accordion Title",
+  content:
+    "Nature is all the animals, plants, and other things in the world that are not made by people, and all the events and processes that are not caused by people. The most amazing thing about nature is its infinite variety. ... grasses that grow wild in nature.",
 };
