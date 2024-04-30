@@ -13,4 +13,4 @@ const Template: StoryFn = () => {
   return <BasicBreadcrumbs items={items} />;
 };
 
-export const Default = Template.bind({});
+export const BasicBreadcrumb = Template.bind({});

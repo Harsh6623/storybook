@@ -1,20 +1,35 @@
 import React from "react";
-import { StoryFn, Meta } from "@storybook/react";
-import BottonNavigation from "@/components/ButtonNavigation";
-
+import { StoryFn } from "@storybook/react";
+import BottomNavigation from "@/components/ButtonNavigation";
 export default {
-  title: "Components/BottonNavigation",
-  component: BottonNavigation,
-} as Meta;
-
-const Template: StoryFn = () => {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (newValue: number) => {
-    setValue(newValue);
-  };
-
-  return <BottonNavigation value={value} onChange={handleChange} />;
+  title: "Components/BottomNavigation",
+  component: BottomNavigation,
+  argTypes: {
+    recentsLabel: {
+      control: { type: "text" },
+      defaultValue: "Recents",
+    },
+    favoriteLabel: {
+      control: { type: "text" },
+      defaultValue: "Favorite",
+    },
+    nearbyLabel: {
+      control: { type: "text" },
+      defaultValue: "Nearby",
+    },
+  },
 };
-
-export const Default = Template.bind({});
+interface BottomNavigationProps {
+  recentsLabel: string;
+  favoriteLabel: string;
+  nearbyLabel: string;
+}
+const Template: StoryFn<BottomNavigationProps> = (args) => (
+  <BottomNavigation {...args} />
+);
+export const BottomNavigations = Template.bind({});
+BottomNavigations.args = {
+  recentsLabel: "Recents",
+  favoriteLabel: "Favorite",
+  nearbyLabel: "Nearby",
+};

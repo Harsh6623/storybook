@@ -10,7 +10,7 @@ export interface CardProps {
 
 const Card: React.FC<CardProps> = ({ title, date, imageUrl, description }) => {
   return (
-    <div className="bg-white w-[345px]  shadow-md rounded-md p-4 ml-[500px] mt-10 ">
+    <div className="bg-white w-[345px] shadow-md rounded-md p-4 ml-[500px] mt-10 ">
       <div className="mb-4">
         <h2 className="text-xl font-bold mb-2">{title}</h2>
         <p className="text-gray-500">{date}</p>

@@ -9,4 +9,4 @@ export default {
 
 const Template: StoryFn<SkeletonProps> = (args) => <Skeleton {...args} />;
 
-export const Default = Template.bind({});
+export const Skeletons = Template.bind({});

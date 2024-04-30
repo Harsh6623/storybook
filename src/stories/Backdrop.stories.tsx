@@ -8,4 +8,4 @@ export default {
 const Template: StoryFn = () => (
   <Backdrop onClose={() => console.log("Backdrop closed")} />
 );
-export const Default = Template.bind({});
+export const Backdrops = Template.bind({});

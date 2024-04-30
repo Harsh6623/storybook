@@ -9,8 +9,8 @@ export default {
 
 const Template: StoryFn<CardProps> = (args) => <Card {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+export const Cards = Template.bind({});
+Cards.args = {
   title: "Shrimp and Chorizo Paella",
   date: "April 29, 2024",
   imageUrl: "https://mui.com/static/images/cards/paella.jpg",

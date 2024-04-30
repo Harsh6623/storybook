@@ -9,7 +9,7 @@ export default {
 
 const Template: StoryFn<PaperProps> = (args) => <Paper {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+export const Papers = Template.bind({});
+Papers.args = {
   children: "This is a paper component",
 };

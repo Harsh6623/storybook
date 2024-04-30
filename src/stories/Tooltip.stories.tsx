@@ -12,4 +12,4 @@ const Template = (args: any) => (
     </button>
   </Tooltip>
 );
-export const Default = Template.bind({});
+export const Tooltips = Template.bind({});
