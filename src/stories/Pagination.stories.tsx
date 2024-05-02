@@ -1,6 +1,6 @@
 import React from "react";
 import { StoryFn, Meta } from "@storybook/react";
-import Pagination, { PaginationProps } from "@/components/Pagination";
+import Pagination from "@/components/Pagination";
 
 export default {
   title: "Components/Pagination",
@@ -9,7 +9,13 @@ export default {
     color: {
       control: {
         type: "select",
-        options: ["primary", "secondary", "standard", "custom"],
+        options: ["primary", "secondary", "standard"],
+      },
+    },
+    shape: {
+      control: {
+        type: "select",
+        options: ["circular", "rounded"],
       },
     },
     size: {
@@ -21,24 +27,19 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<PaginationProps> = (args) => <Pagination {...args} />;
+interface PaginationStoryProps {
+  color: "primary" | "secondary" | "standard";
+  shape: "circular" | "rounded";
+  size: "small" | "medium" | "large";
+}
 
-export const Default = Template.bind({});
-Default.args = {
-  currentPage: 1,
-  totalPages: 10,
-  onPageChange: (page: number) => console.log("Page changed to", page),
+const Template: StoryFn<PaginationStoryProps> = (args) => (
+  <Pagination {...args} />
+);
+
+export const PaginationNumber = Template.bind({});
+PaginationNumber.args = {
   color: "standard",
-};
-
-export const SmallSize = Template.bind({});
-SmallSize.args = {
-  ...Default.args,
-  size: "small",
-};
-
-export const LargeSize = Template.bind({});
-LargeSize.args = {
-  ...Default.args,
-  size: "large",
+  shape: "rounded",
+  size: "medium",
 };
