@@ -18,4 +18,4 @@ const Template: StoryFn = () => (
   </Grid>
 );
 
-export const Default = Template.bind({});
+export const Grids = Template.bind({});
